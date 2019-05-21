@@ -18,10 +18,11 @@ app.get("/", function (req, res) {
   res.sendFile(__dirname + '/views/index.html');
 });
 
-
-// your first API endpoint... 
-app.get("/api/hello", function (req, res) {
-  res.json({greeting: 'hello API'});
+// Challenge Endpoint
+app.get("/api/timestamp/:date_string?", (req, res) => {
+  const dateString = req.params.date_string;
+  const date = (dateString) ? new Date(dateString) : new Date();
+  res.send({"unix": date.getTime(), "utc": date.toUTCString()})
 });
 
 
